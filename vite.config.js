@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import glob from 'glob';
 import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
+import sass from 'sass';
 
 export default defineConfig(({ command }) => {
   return {
@@ -25,6 +26,17 @@ export default defineConfig(({ command }) => {
       },
       outDir: '../dist',
     },
-    plugins: [injectHTML(), FullReload(['./src/**/**.html'])],
+    plugins: [injectHTML(), FullReload(['./src/**/**.html']),    {
+      name: 'vite-plugin-scss',
+      setup(build) {
+        build.onLoad({ filter: /\.scss$/ }, async (args) => {
+          const result = await sass.render({ file: args.path });
+          return {
+            contents: result.css.toString(),
+            loader: 'css',
+          };
+        });
+      },
+    }],
   };
 });
