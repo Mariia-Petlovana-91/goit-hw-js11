@@ -48,10 +48,12 @@ function onSearch(e){
 		lightbox.refresh();
 		refs.form.reset();
            
-		if (hits.length === 0) {
-		    erorr();
-		}
+		// if (hits.length === 0) {
+		//     erorr();
+		// }
 	  })
+
+	  .catch(erorr());
 	
 }
     
