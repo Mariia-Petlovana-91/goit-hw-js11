@@ -10,14 +10,20 @@ export class PixabayApi {
 
 	fetchImade(){
 	       return fetch(`${BASE_URL}/?key=${KEY_API}&q=${this.findValue}${OTHER_SETTINGS}`)
-		.then(response => response.json())
+		.then(response => {
+			if (!response.ok){
+				throw new Error (response.status);
+			}
+
+			return response.json();
+		})
 		.then(data => {
 			return data.hits
-		    })
-		    .catch(err=>{
-			console.log(err);
-			
 		})
+		.catch(err => {
+			error();
+		  });
+
 	}
 
 	get findValue(){

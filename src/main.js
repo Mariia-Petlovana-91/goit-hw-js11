@@ -30,7 +30,12 @@ refs.form.addEventListener('submit', onSearch);
 
 function onSearch(e){
 	e.preventDefault();
+	
+	const searchValue = refs.form.elements.find.value;
 
+	 if (searchValue === ''){
+            alert('Please enter the name of the element you are looking for in the search field.');
+	 }
       refs.galleryContainer.innerHTML='';
 
 	loader(refs.loaderEl);
@@ -53,6 +58,10 @@ function onSearch(e){
 		    return;
 		}
 	  })
+	.catch(err => {
+            error();
+            console.error('Search operation failed:', err);
+        });
 	
 }
     
