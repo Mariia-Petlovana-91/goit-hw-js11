@@ -6,8 +6,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { refs, createItem, loader } from './js/render-functions';
 import { PixabayApi, } from './js/pixabay-api';
 
-
-function erorr(){
+function error(){
 	iziToast.show({
 	    backgroundColor: 'red',
 	    messageColor: 'white',
@@ -16,6 +15,7 @@ function erorr(){
 	    
 	});
   }
+
 
 let lightbox = new SimpleLightbox('.gallery a', {
 	navText:  ['<','>'],
@@ -48,12 +48,11 @@ function onSearch(e){
 		lightbox.refresh();
 		refs.form.reset();
            
-		// if (hits.length === 0) {
-		//     erorr();
-		// }
+		if (hits.length === 0) {
+		    error();
+		    return;
+		}
 	  })
-
-	  .catch(erorr());
 	
 }
     

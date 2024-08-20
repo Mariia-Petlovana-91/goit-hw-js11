@@ -14,7 +14,10 @@ export class PixabayApi {
 		.then(data => {
 			return data.hits
 		    })
-
+		    .catch(err=>{
+			console.log(err);
+			
+		})
 	}
 
 	get findValue(){
